@@ -1,36 +1,41 @@
 package com.capgemini.entity;
 
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="dept")
 public class Dept {
 	
 	@Id
-	private String deptId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "deptId")
+	private long deptId;
 	
+	@Column(name = "title")
 	private String title;
+	
+	@Column(name = "description")
 	private String description;
 
-	@OneToMany(mappedBy= "dept", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="department", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
-    private List<Employee> employees;
+    private Set<Employee> employees = new HashSet<Employee>();
 	
-		public List<Employee> getEmployees() {
+	public Set<Employee> getEmployees() {
 		return employees;
 	}
-	public void setEmployees(List<Employee> employees) {
+	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
 	}
 	
-	public String getDeptId() {
+	public long getDeptId() {
 		return deptId;
 	}
-	public void setDeptId(String deptId) {
+	public void setDeptId(long deptId) {
 		this.deptId = deptId;
 	}
 	public String getTitle() {

@@ -3,11 +3,17 @@ package com.capgemini.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="address")
 public class Address {
+	
 	@Id
-	private String id;
+	@Column(name="addressId")
+	private long id;
 
+	@Column(name="city")
 	private String city;
+	
+	@Column(name="pincode")
 	private String pincode;
 
 	public String getCity() {
@@ -31,11 +37,11 @@ public class Address {
 		this.pincode = pincode;
 	}
 	
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 }

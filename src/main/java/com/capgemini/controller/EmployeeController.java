@@ -27,7 +27,7 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employee/{empId}")
-	public Optional<Employee> getEmployeeById(@PathVariable String empId) {
+	public Optional<Employee> getEmployeeById(@PathVariable long empId) {
 		return employeeService.getEmployeeById(empId);
 	}
 	
@@ -37,27 +37,13 @@ public class EmployeeController {
 	}
 	
 	@DeleteMapping("/employee/{empId}")
-	public void deleteEmployee(@PathVariable String empId) {
+	public void deleteEmployee(@PathVariable long empId) {
 		employeeService.deleteEmployee(empId);
 	}
 	
 	@PutMapping("/employee/{empId}")
-	public Employee updateEmployee(@PathVariable String empId, @RequestBody Employee employee) {
+	public Employee updateEmployee(@PathVariable long empId, @RequestBody Employee employee) {
 		return employeeService.updateEmployee(empId, employee);
 	}
 }
 
-/*
-{
-"empId": "101", "name": "Kat",  "designation": "Engineer", "salary": 150000,
-"dept":{
-    "deptId": 101, "title": "ADM", "description": "Application Development Management"
-}, 
-"project": {
-    "projectId": 101, "name": "training", "description": "May 2021"
-}  ,
-"address": {
-    "id": "101", "city": "Chicago", "pincode": "52240"
-}
-}
-*/

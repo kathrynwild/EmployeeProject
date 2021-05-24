@@ -9,12 +9,12 @@ public interface EmployeeService {
 
 	List<Employee> getAllEmployeeDetails();
 
-	Optional<Employee> getEmployeeById(String empId);
+	Optional<Employee> getEmployeeById(long empId);
 
 	Employee addEmployee(Employee emp);
 
-	void deleteEmployee(String empId);
+	void deleteEmployee(long empId);
 
-	Employee updateEmployee(String empId, Employee employee);
+	Employee updateEmployee(long empId, Employee employee);
 
 }

@@ -2,36 +2,46 @@ package com.capgemini.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@Table(name="employee")
 public class Employee {
 
 	@Id
-	private String empId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "empId")
+	private long empId;
 	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "designation")
 	private String designation;
+	
+	@Column(name = "salary")
 	private double salary;
 	
 	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="addressId")
     private Address address;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Project project;
+	//@JoinColumn(foreignKey = @ForeignKey(name = "projectId"),name = "projectId")
+	@JoinColumn(name = "projectId")
+	private Project project1;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Dept dept;
+	//@JoinColumn(foreignKey = @ForeignKey(name = "deptId"), name = "deptId")
+	@JoinColumn(name = "deptId")
+	private Dept department;
 	
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Employee(String empId, String name, String designation, double salary) {
+	public Employee(long empId, String name, String designation, double salary) {
 		super();
 		this.empId = empId;
 		this.name = name;
@@ -39,11 +49,11 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public String getEmpId() {
+	public long getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(String empId) {
+	public void setEmpId(long empId) {
 		this.empId = empId;
 	}
 
@@ -80,19 +90,19 @@ public class Employee {
 	}
 
 	public Project getProject() {
-		return project;
+		return project1;
 	}
 
 	public void setProject(Project project) {
-		this.project = project;
+		this.project1 = project;
 	}
 
 	public Dept getDept() {
-		return dept;
+		return department;
 	}
 
 	public void setDept(Dept dept) {
-		this.dept = dept;
+		this.department = dept;
 	}
 
 }
